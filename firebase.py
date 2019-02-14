@@ -26,18 +26,40 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 #  Routing
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/log', methods=['GET', 'POST'])
 def log():
     if request.method == 'POST':
         name = request.form['user']
         password = request.form['password']
+        user = session.query(User).filter_by(name=name).first()
+        if user is not None:
+            #user = session.query(User).filter_by(name=name)
+            if user.password ==password:
+                return render_template('home.html',user=user)
+        else:
+            flash("not such user in db")
+            return redirect(url_for('log'))       
     else:
-         return render_template('login.html')
-@app.route('/')
+         return render_template('log.html')
+@app.route('/home')
 def home():
-    user = session.query(User).first()
-    return user.name 
+    return render_template('Home.html')
+
     
+@app.route('/reg', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
+def reg():
+      if request.method == 'POST':
+          user1 = User(name=request.form['name'],
+                      password = request.form['password'])
+          session.add(user1)
+          session.commit()
+          flash("sccussfully signing in ...")
+          return render_template('Home.html',user = user1)
+      else:
+          return render_template('register.html')
+        
+      
 
 if __name__ == '__main__':
     app.debug = True

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Market | Stock</title>
+  <title>Login | Stock</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -37,8 +37,6 @@
 
 
 
-
-
                         {% with messages = get_flashed_messages() %}
                         {% if messages %}
                             <div class="alert alert-info alert-dismissable animated fadeIn">
@@ -52,12 +50,24 @@
 
 
 
+                            <form action="{{url_for('log')}}" method="POST">
+                                <div class="form-group">
+                                  <label for="email">User name:</label>
+                                  <input type="email" class="form-control" id="email"name="user">
+                                </div>
+                                <div class="form-group">
+                                  <label for="pwd">Password:</label>
+                                  <input type="password" class="form-control" id="pwd" name="password">
+                                </div>
+                                <div class="checkbox">
+                                  <label><input type="checkbox"> Remember me</label>
+                                </div>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+                              </form>
+            
+                            </div>
 
-
-                            <h1>Welcome in home</h1>
-                            <h2>as</h2>
-                            <h3>{{user.name}}</h3>
-                     </div>
+                           
               </div>
         
     </body>

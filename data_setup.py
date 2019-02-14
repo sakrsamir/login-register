@@ -33,8 +33,7 @@ class User(Base):
 	# make name small chars
 	__tablename__ = 'users'
 
-	name = Column(String(80), nullable = False)
-	id = Column(Integer, primary_key = True)
+	name = Column(String(80), primary_key = True)
 	password = Column(String(80), nullable = False)
 
 # at the end
